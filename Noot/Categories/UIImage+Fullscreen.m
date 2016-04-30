@@ -13,7 +13,7 @@
 + (instancetype)fullscreenImageNamed:(NSString *)name {
     NSUInteger screenHeight = [[UIScreen mainScreen] bounds].size.height;
     
-    NSString *suffix;
+    NSString *suffix = @"";
     switch (screenHeight) {
         case 568:
             suffix = @"-568h@2x";
