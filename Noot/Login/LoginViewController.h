@@ -11,6 +11,8 @@
 
 @protocol LoginViewControllerDelegate <NSObject>
 
+- (void)didLoginSuccessfully:(__weak LoginViewController *)LoginViewController;
+
 @end
 
 @interface LoginViewController : UIViewController

@@ -9,7 +9,7 @@
 #import "NootBaseNetworkModel.h"
 
 #pragma mark - Network callback block typedefs
-typedef void(^NootBaseNetworkSuccess)(NootBaseNetworkModel *networkCallback);
+typedef void(^NootBaseNetworkSuccess)(NootBaseNetworkModel *networkModel);
 typedef void(^NootBaseNetworkFailure)(NSError *error);
 
 typedef NS_ENUM(NSUInteger, NootNetworkCallType) {

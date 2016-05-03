@@ -8,40 +8,49 @@
 
 #import "NootUserModelDatasource.h"
 #import "NootUserModelFactory.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation NootUserModelFactory
 
-#pragma mark - User login / fetch user model and access token
-- (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password accessToken:(NSString *)accessToken success:(NootUserLoginSuccess)success failure:(NootBaseNetworkFailure)failure {
+#pragma mark - User login
+- (void)loginUserWithSuccess:(NootUserLoginSuccess)success failure:(NootBaseNetworkFailure)failure {
     
-    NootUserModelDatasource *dataSource = [[NootUserModelDatasource alloc] init];
-    [dataSource postLoginUserWithSuccess:^(NootBaseNetworkModel *networkCallback) {
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            NootUserModel *model;
-            NSString *newAccessToken;
-            NSString *expiryDate;
-            
-            if(networkCallback.success) {
-                model          = [NootUserModelFactory userModelForData:networkCallback.responseData];
-                newAccessToken = networkCallback.responseData[@"access_token"];
-                expiryDate     = networkCallback.responseData[@"expiry_date"];
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                success(model, newAccessToken, networkCallback);
-            });
-        });
-
-    } failure:^(NSError *error) {
-        
-        failure(error);
-    }];
+    if ([FBSDKAccessToken currentAccessToken]) {
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"/me?fields=email,name,id" parameters:nil]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id graphResult, NSError *error) {
+             if (error) {
+                 return failure(error);
+             }
+             NootUserModelDatasource *dataSource = [[NootUserModelDatasource alloc] init];
+             [dataSource postLoginUserWithFacebookProfile:[FBSDKProfile currentProfile] andEmail:graphResult[@"email"] success:^(NootBaseNetworkModel *networkCallback) {
+                 
+                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                     
+                     NootUserModel *model;
+                     NSString *newAccessToken;
+                     NSString *expiryDate;
+                     
+                     if(networkCallback.success) {
+                         model          = [NootUserModelFactory userModelForData:networkCallback.responseData];
+                         newAccessToken = networkCallback.responseData[@"access_token"];
+                         expiryDate     = networkCallback.responseData[@"expiry_date"];
+                     }
+                     
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         success(model, newAccessToken, networkCallback);
+                     });
+                 });
+                 
+             } failure:^(NSError *error) {
+                 
+                 failure(error);
+             }];
+         }];
+    }
 }
 
 #pragma mark - User logout
-- (void)fetchLogoutUserWithUserId:(NSString *)userId accessToken:(NSString *)accessToken success:(NootBaseNetworkSuccess)success failure:(NootBaseNetworkFailure)failure {
+- (void)logoutUserWithUserId:(NSString *)userId accessToken:(NSString *)accessToken success:(NootBaseNetworkSuccess)success failure:(NootBaseNetworkFailure)failure {
     
     NootUserModelDatasource *dataSource = [[NootUserModelDatasource alloc] init];
     [dataSource postLogoutUserWithUserId:userId accessToken:accessToken success:^(NootBaseNetworkModel *networkCallback) {
@@ -82,8 +91,6 @@
     [model setValue:userDictionary[@"profile_image"] forKey:@"userImageUrl"];
     [model setValue:userDictionary[@"display_name"] forKey:@"displayName"];
 
-    BOOL isDeactivated = [userDictionary[@"deactivated"] boolValue];
-    model.isDeactivated = isDeactivated;
     
     return model;
 }

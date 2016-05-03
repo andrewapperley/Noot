@@ -14,8 +14,6 @@
 @property (nonatomic, copy, readonly) NSString *user_id;
 @property (nonatomic, copy, readonly) NSString *userImageUrl;
 @property (nonatomic, copy, readonly) NSString *displayName;
-@property (nonatomic, assign) NSUInteger videoCount;
-@property (nonatomic, readonly) BOOL isNewConnection;
-@property (nonatomic) BOOL isDeactivated;
+@property (nonatomic, copy, readonly) NSString *emailAddress;
 
 @end

@@ -28,7 +28,9 @@ const NSString *kNootBaseNetworkKeyHardwareInfoParam    = @"hardware_info";
     dispatch_once(&onceToken, ^{
                 
         NSURL *baseRequestURL = [NSURL URLWithString:[NSProcessInfo processInfo].environment[@"BASE_URL"]];
-        
+        if (!baseRequestURL) {
+            [NSURL URLWithString:@"http://192.168.1.5:8000"];
+        }
         //Create session manager
         sessionManager        = [[AFHTTPSessionManager alloc] initWithBaseURL:baseRequestURL];
     });

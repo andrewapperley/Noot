@@ -8,7 +8,8 @@
 
 #import "LoginViewController.h"
 #import "LoginView.h"
-#import "NootUserModelDatasource.h"
+#import "NootUserModelFactory.h"
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface LoginViewController () <LoginViewDelegate> {
     
@@ -37,12 +38,30 @@
 #pragma mark - LoginViewDelegate -
 
 - (void)didLoginWithFacebook:(LoginView *__weak)LoginView {
-    NootUserModelDatasource *datasource = [[NootUserModelDatasource alloc] init];
-    [datasource postLoginUserWithSuccess:^(NootBaseNetworkModel *networkCallback) {
-        
-    } failure:^(NSError *error) {
-        
-    }];
+    typeof(self) __weak wself = self;
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login
+     logInWithReadPermissions: @[@"public_profile", @"email", @"user_friends"]
+     fromViewController:wself
+     handler:^(FBSDKLoginManagerLoginResult *loginResult, NSError *error) {
+         if (error) {
+             NSLog(@"Process error");
+         } else if (loginResult.isCancelled) {
+             NSLog(@"Cancelled");
+         } else {
+             NootUserModelFactory *factory = [[NootUserModelFactory alloc] init];
+             [factory loginUserWithSuccess:^(NootUserModel *userModel, NSString *accessToken, NootBaseNetworkModel *networkModel) {
+                 // Show next screen
+                 LoginView.userInteractionEnabled = YES;
+                 [self.delegate didLoginSuccessfully:wself];
+             } failure:^(NSError *error) {
+                 // Display Error
+                 LoginView.userInteractionEnabled = YES;
+                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                 [self presentViewController:alert animated:YES completion:nil];
+            }];
+         }
+     }];
 }
 
 @end
