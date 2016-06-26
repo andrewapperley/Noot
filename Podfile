@@ -5,6 +5,7 @@
 
 target 'Noot' do
     pod 'AFNetworking', '~> 3.1.0'
+    pod 'FMDB'
 end
 
 target 'NootTests' do

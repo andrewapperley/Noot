@@ -12,8 +12,7 @@
 
 @class FBSDKProfile;
 
-typedef void(^NootUserLoginSuccess)(NootUserModel *userModel, NSString *accessToken, NootBaseNetworkModel *networkModel);
-typedef void(^NootUserModelSuccess)(NootUserModel *userModel, NootBaseNetworkModel *networkCallback);
+typedef void(^NootUserLoginSuccess)(NootUserModel *userModel, NootBaseNetworkModel *networkModel);
 
 @interface NootUserModelFactory : NSObject
 

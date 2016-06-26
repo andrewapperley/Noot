@@ -13,7 +13,7 @@
 @interface NootUserModelDatasource : NootBaseNetworkDatasource
 
 #pragma mark - User login
-- (void)postLoginUserWithFacebookProfile:(FBSDKProfile *)profile andEmail:(NSString *)email success:(NootBaseNetworkSuccess)success failure:(NootBaseNetworkFailure)failure;
+- (void)postLoginUserWithFacebookProfile:(FBSDKProfile *)profile andEmail:(NSString *)email andProfileImage:(NSString *)profileImage success:(NootBaseNetworkSuccess)success failure:(NootBaseNetworkFailure)failure;
 
 #pragma mark - User logout
 - (void)postLogoutUserWithUserId:(NSString *)userId accessToken:(NSString *)accessToken success:(NootBaseNetworkSuccess)success failure:(NootBaseNetworkFailure)failure;

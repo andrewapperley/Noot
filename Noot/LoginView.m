@@ -54,13 +54,13 @@ NSInteger ActionButtonHeight = 50;
     NSLog(@"created login button with frame: %@", NSStringFromCGRect(facebookButton.frame));
 }
 
-#pragma mark - Button Actions -
+#pragma mark - Button Actions
 - (void)loginWithFacebook:(UIEvent *)e {
     self.userInteractionEnabled = NO;
     [self.delegate didLoginWithFacebook:self];
 }
 
-#pragma mark - Cleanup -
+#pragma mark - Cleanup
 
 - (void)dealloc {
     self.delegate = nil;

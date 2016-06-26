@@ -9,6 +9,7 @@
 #import "NootUserModelDatasource.h"
 #import "NootUserModelFactory.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "NootStaticUserModel.h"
 
 @implementation NootUserModelFactory
 
@@ -17,34 +18,37 @@
     
     if ([FBSDKAccessToken currentAccessToken]) {
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"/me?fields=email,name,id" parameters:nil]
-         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id graphResult, NSError *error) {
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id meResult, NSError *error) {
              if (error) {
                  return failure(error);
              }
-             NootUserModelDatasource *dataSource = [[NootUserModelDatasource alloc] init];
-             [dataSource postLoginUserWithFacebookProfile:[FBSDKProfile currentProfile] andEmail:graphResult[@"email"] success:^(NootBaseNetworkModel *networkCallback) {
-                 
-                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                     
-                     NootUserModel *model;
-                     NSString *newAccessToken;
-                     NSString *expiryDate;
-                     
-                     if(networkCallback.success) {
-                         model          = [NootUserModelFactory userModelForData:networkCallback.responseData];
-                         newAccessToken = networkCallback.responseData[@"access_token"];
-                         expiryDate     = networkCallback.responseData[@"expiry_date"];
-                     }
-                     
-                     dispatch_async(dispatch_get_main_queue(), ^{
-                         success(model, newAccessToken, networkCallback);
-                     });
-                 });
-                 
-             } failure:^(NSError *error) {
-                 
-                 failure(error);
-             }];
+             [[[FBSDKGraphRequest alloc] initWithGraphPath:@"/me/picture?fields=url&type=large&redirect=false" parameters:nil]
+              startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id pictureResult, NSError *error) {
+                  if (error) {
+                      return failure(error);
+                  }
+                  NootUserModelDatasource *dataSource = [[NootUserModelDatasource alloc] init];
+                  [dataSource postLoginUserWithFacebookProfile:[FBSDKProfile currentProfile] andEmail:meResult[@"email"] andProfileImage:pictureResult[@"data"][@"url"] success:^(NootBaseNetworkModel *networkCallback) {
+                      
+                      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                          
+                          NootUserModel *model;
+                          
+                          if(networkCallback.success) {
+                              model = [NootUserModelFactory userModelForData:networkCallback.responseData];
+                              [[NootStaticUserModel currentUser] updateUserModelWithUserModel:model];
+                          }
+                          
+                          dispatch_async(dispatch_get_main_queue(), ^{
+                              success(model, networkCallback);
+                          });
+                      });
+                      
+                  } failure:^(NSError *error) {
+                      
+                      failure(error);
+                  }];
+              }];
          }];
     }
 }
@@ -66,14 +70,12 @@
 + (NootUserModel *)userModelForData:(NSDictionary *)data {
     
     NootUserModel *model = [[NootUserModel alloc] init];
-    
-    NSDictionary *userDictionary = data[@"User"];
-    if (!userDictionary) {
-        userDictionary = data;
-    }
+    data = data[@"data"];
+    NSDictionary *userDictionary = data[@"user"];
+    NSDictionary *sessionDictionary = data[@"session"];
     
     //User info
-    id userIdValue = userDictionary[@"user_id"];
+    id userIdValue = userDictionary[@"userID"];
     
     if(userIdValue) {
         //Check if string type
@@ -87,9 +89,11 @@
         }
     }
     
-    [model setValue:userDictionary[@"username"] forKey:@"userName"];
-    [model setValue:userDictionary[@"profile_image"] forKey:@"userImageUrl"];
-    [model setValue:userDictionary[@"display_name"] forKey:@"displayName"];
+    [model setValue:userDictionary[@"profileImage"] forKey:@"userImageUrl"];
+    [model setValue:userDictionary[@"name"] forKey:@"displayName"];
+    [model setValue:userDictionary[@"email"] forKey:@"emailAddress"];
+    [model setValue:sessionDictionary[@"token"] forKey:@"accessToken"];
+    [model setValue:sessionDictionary[@"expiry"] forKey:@"expiry"];
 
     
     return model;

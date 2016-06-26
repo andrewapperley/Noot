@@ -35,7 +35,7 @@
     self.view.delegate = self;
 }
 
-#pragma mark - LoginViewDelegate -
+#pragma mark - LoginViewDelegate
 
 - (void)didLoginWithFacebook:(LoginView *__weak)LoginView {
     typeof(self) __weak wself = self;
@@ -50,7 +50,7 @@
              NSLog(@"Cancelled");
          } else {
              NootUserModelFactory *factory = [[NootUserModelFactory alloc] init];
-             [factory loginUserWithSuccess:^(NootUserModel *userModel, NSString *accessToken, NootBaseNetworkModel *networkModel) {
+             [factory loginUserWithSuccess:^(NootUserModel *userModel, NootBaseNetworkModel *networkModel) {
                  // Show next screen
                  LoginView.userInteractionEnabled = YES;
                  [self.delegate didLoginSuccessfully:wself];
@@ -58,6 +58,7 @@
                  // Display Error
                  LoginView.userInteractionEnabled = YES;
                  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                 [alert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil]];
                  [self presentViewController:alert animated:YES completion:nil];
             }];
          }

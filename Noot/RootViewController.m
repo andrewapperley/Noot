@@ -8,9 +8,12 @@
 
 #import "RootViewController.h"
 #import "LoginViewController.h"
+#import "NootListViewController.h"
 #import "UIImage+Fullscreen.h"
+//#import "Database.h"
+#import "NootStaticUserModel.h"
 
-@interface RootViewController() <LoginViewControllerDelegate> {
+@interface RootViewController() <LoginViewControllerDelegate, NootListViewControllerDelegate> {
     __block UIViewController *currentController;
 }
 
@@ -24,25 +27,37 @@
 - (instancetype)initWithDelegate {
     if (self = [super init]) {
         [self.view addSubview:[[UIImageView alloc] initWithImage:[UIImage fullscreenImageNamed:@"LaunchImage"]]];
-        /**
-         * Check for logged in state and either display login screen or main friends list
-         */
-        currentController = (UIViewController *)[[LoginViewController alloc] initWithDelegate:self];
+        [self bootstrap];
+        if ([NootStaticUserModel currentUser].userModel) {
+            currentController = [[NootListViewController alloc] initWithDelegate:self];
+        } else {
+            currentController = [[LoginViewController alloc] initWithDelegate:self];
+        }
         [self addChildViewController:currentController];
         [self.view addSubview:currentController.view];
     }
     return self;
 }
 
-#pragma - Mark LoginViewControllerDelegate -
+#pragma mark - Bootstrap
+
+- (void)bootstrap {
+//    [[Database sharedDatabase] setupDatabase];
+    [[NootStaticUserModel currentUser] updateWithPersistedUser];
+}
+
+#pragma mark - LoginViewControllerDelegate
 
 - (void)didLoginSuccessfully:(LoginViewController *__weak)LoginViewController {
+    
     [UIView animateWithDuration:0.4f animations:^{
         currentController.view.alpha = 0;
     } completion:^(BOOL finished) {
         [currentController removeFromParentViewController];
         [currentController.view removeFromSuperview];
-        currentController = nil;
+        currentController = [[NootListViewController alloc] initWithDelegate:self];
+        [self addChildViewController:currentController];
+        [self.view addSubview:currentController.view];
     }];
 }
 

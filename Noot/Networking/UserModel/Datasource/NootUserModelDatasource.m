@@ -26,12 +26,13 @@ NSString *kNootUserModelParameterKeyDisplayName         = @"display_name";
 @implementation NootUserModelDatasource
 
 #pragma mark - User login
-- (void)postLoginUserWithFacebookProfile:(FBSDKProfile *)profile andEmail:(NSString *)email success:(NootBaseNetworkSuccess)success failure:(NootBaseNetworkFailure)failure {
+- (void)postLoginUserWithFacebookProfile:(FBSDKProfile *)profile andEmail:(NSString *)email andProfileImage:(NSString *)profileImage success:(NootBaseNetworkSuccess)success failure:(NootBaseNetworkFailure)failure {
     
     NSDictionary *parameters = @{
                                  kNootUserModelParameterKeyUserID: profile.userID,
                                  kNootUserModelParameterKeyDisplayName: profile.name,
                                  kNootUserModelParameterKeyEmail: email,
+                                 kNootUserModelParameterKeyProfileImage: profileImage,
                                  kNootUserModelParameterKeyFirstName: profile.firstName,
                                  kNootUserModelParameterKeyLastName: profile.lastName,
                                  kNootUserModelParameterKeyAcessToken: [FBSDKAccessToken currentAccessToken].tokenString,

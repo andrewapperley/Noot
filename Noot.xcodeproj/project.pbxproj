@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F1962241D205FA3008BBF1C /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1962231D205FA3008BBF1C /* Database.m */; };
+		0F1962271D206D08008BBF1C /* NootStaticUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1962261D206D08008BBF1C /* NootStaticUserModel.m */; };
+		0F19622B1D2083E7008BBF1C /* NootListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F19622A1D2083E7008BBF1C /* NootListViewController.m */; };
+		0F19622E1D2083FA008BBF1C /* NootListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F19622D1D2083FA008BBF1C /* NootListView.m */; };
 		0F6F57D51CD4EDFB000E36EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6F57D41CD4EDFB000E36EF /* main.m */; };
 		0F6F57D81CD4EDFB000E36EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6F57D71CD4EDFB000E36EF /* AppDelegate.m */; };
 		0F6F57E61CD4EDFB000E36EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F6F57E51CD4EDFB000E36EF /* Assets.xcassets */; };
 		0F6F57F41CD4EDFC000E36EF /* NootTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6F57F31CD4EDFC000E36EF /* NootTests.m */; };
 		0F6F57FF1CD4EDFC000E36EF /* NootUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6F57FE1CD4EDFC000E36EF /* NootUITests.m */; };
 		0F6F580E1CD4F38C000E36EF /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6F580D1CD4F38C000E36EF /* RootViewController.m */; };
+		0FA374EA1D1ECE8300DF2D3E /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA374E81D1ECE8300DF2D3E /* libsqlite3.0.tbd */; };
+		0FA374EB1D1ECE8300DF2D3E /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA374E91D1ECE8300DF2D3E /* libsqlite3.tbd */; };
 		0FA9A77A1CD5050400DE230C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA9A7791CD5050400DE230C /* LoginViewController.m */; };
 		0FA9A77D1CD5052400DE230C /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA9A77C1CD5052400DE230C /* LoginView.m */; };
 		0FA9A7A51CD54AA200DE230C /* NootBaseNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA9A7961CD54AA200DE230C /* NootBaseNetworkModel.m */; };
@@ -44,6 +50,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F1962221D205FA3008BBF1C /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		0F1962231D205FA3008BBF1C /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
+		0F1962251D206D08008BBF1C /* NootStaticUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NootStaticUserModel.h; sourceTree = "<group>"; };
+		0F1962261D206D08008BBF1C /* NootStaticUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NootStaticUserModel.m; sourceTree = "<group>"; };
+		0F1962291D2083E7008BBF1C /* NootListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NootListViewController.h; sourceTree = "<group>"; };
+		0F19622A1D2083E7008BBF1C /* NootListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NootListViewController.m; sourceTree = "<group>"; };
+		0F19622C1D2083FA008BBF1C /* NootListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NootListView.h; sourceTree = "<group>"; };
+		0F19622D1D2083FA008BBF1C /* NootListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NootListView.m; sourceTree = "<group>"; };
 		0F6F57D01CD4EDFA000E36EF /* Noot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F6F57D41CD4EDFB000E36EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0F6F57D61CD4EDFB000E36EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,6 +72,8 @@
 		0F6F58001CD4EDFC000E36EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F6F580C1CD4F38C000E36EF /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		0F6F580D1CD4F38C000E36EF /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		0FA374E81D1ECE8300DF2D3E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		0FA374E91D1ECE8300DF2D3E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		0FA9A7781CD5050400DE230C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
 		0FA9A7791CD5050400DE230C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Login/LoginViewController.m; sourceTree = "<group>"; };
 		0FA9A77B1CD5052400DE230C /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -86,6 +102,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FA374EA1D1ECE8300DF2D3E /* libsqlite3.0.tbd in Frameworks */,
+				0FA374EB1D1ECE8300DF2D3E /* libsqlite3.tbd in Frameworks */,
 				F4433452698687A2B58A6692 /* libPods-Noot.a in Frameworks */,
 				0FA9A7BA1CD57FD900DE230C /* FBSDKCoreKit.framework in Frameworks */,
 				0FA9A7BC1CD5810200DE230C /* FBSDKLoginKit.framework in Frameworks */,
@@ -109,6 +127,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F1962211D205F8E008BBF1C /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				0F1962221D205FA3008BBF1C /* Database.h */,
+				0F1962231D205FA3008BBF1C /* Database.m */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		0F1962281D2083D8008BBF1C /* NootList */ = {
+			isa = PBXGroup;
+			children = (
+				0F1962291D2083E7008BBF1C /* NootListViewController.h */,
+				0F19622A1D2083E7008BBF1C /* NootListViewController.m */,
+				0F19622C1D2083FA008BBF1C /* NootListView.h */,
+				0F19622D1D2083FA008BBF1C /* NootListView.m */,
+			);
+			path = NootList;
+			sourceTree = "<group>";
+		};
 		0F6F57C71CD4EDFA000E36EF = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +172,8 @@
 		0F6F57D21CD4EDFB000E36EF /* Noot */ = {
 			isa = PBXGroup;
 			children = (
+				0F1962281D2083D8008BBF1C /* NootList */,
+				0F1962211D205F8E008BBF1C /* Database */,
 				0FA9A7B21CD5709600DE230C /* Categories */,
 				0FA9A77E1CD548D300DE230C /* Networking */,
 				0FA9A7771CD504E800DE230C /* Login */,
@@ -249,6 +289,8 @@
 			children = (
 				0FA9A7A11CD54AA200DE230C /* NootUserModel.h */,
 				0FA9A7A21CD54AA200DE230C /* NootUserModel.m */,
+				0F1962251D206D08008BBF1C /* NootStaticUserModel.h */,
+				0F1962261D206D08008BBF1C /* NootStaticUserModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,6 +307,8 @@
 		2DBDCA9D79E31F51058413C5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FA374E81D1ECE8300DF2D3E /* libsqlite3.0.tbd */,
+				0FA374E91D1ECE8300DF2D3E /* libsqlite3.tbd */,
 				0FA9A7BB1CD5810200DE230C /* FBSDKLoginKit.framework */,
 				0FA9A7B91CD57FD900DE230C /* FBSDKCoreKit.framework */,
 				209B8D9920A0A60104148C53 /* libPods-Noot.a */,
@@ -351,6 +395,7 @@
 				TargetAttributes = {
 					0F6F57CF1CD4EDFA000E36EF = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = FY3J4UQCJY;
 					};
 					0F6F57EE1CD4EDFC000E36EF = {
 						CreatedOnToolsVersion = 7.3;
@@ -468,8 +513,12 @@
 				0FA9A7B11CD5547200DE230C /* NootBaseNetworkDatasource.m in Sources */,
 				0FA9A7AB1CD54CD900DE230C /* NootUserModelDatasource.m in Sources */,
 				0FA9A77D1CD5052400DE230C /* LoginView.m in Sources */,
+				0F19622E1D2083FA008BBF1C /* NootListView.m in Sources */,
+				0F1962271D206D08008BBF1C /* NootStaticUserModel.m in Sources */,
 				0F6F580E1CD4F38C000E36EF /* RootViewController.m in Sources */,
+				0F19622B1D2083E7008BBF1C /* NootListViewController.m in Sources */,
 				0FA9A7A51CD54AA200DE230C /* NootBaseNetworkModel.m in Sources */,
+				0F1962241D205FA3008BBF1C /* Database.m in Sources */,
 				0FA9A7A91CD54AA300DE230C /* NootUserModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,6 +643,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -603,6 +654,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.andrewapperley.Noot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -612,6 +664,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -621,6 +675,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.andrewapperley.Noot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
